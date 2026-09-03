@@ -1,107 +1,53 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Differential Equation Solver</title>
+<html lang="en">
 
-    <!-- MathJax -->
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Differential Equation Solver</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- MathJax 3 Configuration & Library -->
     <script>
         MathJax = {
             tex: {
                 inlineMath: [['\\(', '\\)']],
                 displayMath: [['\\[', '\\]']]
+            },
+            startup: {
+                typeset: false
             }
         };
     </script>
-
-    <script async
-        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-    </script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
-<body><!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Differential Equation Solver</title>
-  <link rel="stylesheet" href="style.css" />
-
-  <!-- MathJax 3 Configuration & Library -->
-  <script>
-    MathJax = {
-      tex: {
-        inlineMath: [['\\(', '\\)']],
-        displayMath: [['\\[', '\\]']]
-      },
-      startup: {
-        typeset: false
-      }
-    };
-  </script>
-  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</head>
 <body>
-  <div class="container">
-    <header class="app-header">
-      <h1>Differential Equation Solver</h1>
-      <p>Step-by-Step Laplace Transform Solutions</p>
-    </header>
+    <div class="container">
+        <header class="app-header">
+            <h1>
+                Test06: Solving Differential Equation by Laplace Transform
+            </h1>
+            <p>MATH0201 Linear Algebra and Differential Equation</p>
+        </header>
 
-    <nav class="question-nav" id="question-nav">
-      <!-- Question buttons generated dynamically -->
-    </nav>
+        <nav class="question-nav" id="question-nav">
+            <!-- Question buttons generated dynamically -->
+        </nav>
 
-    <main class="solution-card">
-      <div id="solution-content">
-        <!-- Selected question content rendered dynamically -->
-      </div>
+        <main class="solution-card">
+            <div id="solution-content">
+                <!-- Selected question content rendered dynamically -->
+            </div>
 
-      <div class="navigation-controls">
-        <button id="prev-btn" class="nav-btn">&larr; Previous</button>
-        <button id="next-btn" class="nav-btn">Next &rarr;</button>
-      </div>
-    </main>
-  </div>
+            <div class="navigation-controls">
+                <button id="prev-btn" class="nav-btn">&larr; Previous</button>
+                <button id="next-btn" class="nav-btn">Next &rarr;</button>
+            </div>
+        </main>
+    </div>
 
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
-</html>
 
-    <h1>No.0001</h1>
-
-    <h2>No1</h2>
-
-    <p>
-        \[
-        F(s)=\frac{5s^2+14s-92}{(s-8)(s^2+4)}
-        \]
-    </p>
-
-    <h3>1.1 Partial Fraction</h3>
-
-    <p>
-        \[
-        F(s)=\frac{5}{s-8}+\frac{14}{s^2+4}
-        \]
-    </p>
-
-    <h3>1.2 Inverse Laplace</h3>
-
-    <p>
-        \[
-        f(t)=5\mathcal{L}^{-1}
-        \left\{\frac{1}{s-8}\right\}
-        +7\mathcal{L}^{-1}
-        \left\{\frac{2}{s^2+2^2}\right\}
-        \]
-    </p>
-
-    <p>
-        \[
-        f(t)=5e^{8t}+7\sin(2t)
-        \]
-    </p>
-
-</body>
 </html>

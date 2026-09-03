@@ -39,7 +39,10 @@ function renderQuestionButtons() {
 
 function selectQuestion(index) {
   currentIndex = index;
-  
+
+  // Scroll window to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
   // Update button active states
   const buttons = document.querySelectorAll('.q-btn');
   buttons.forEach((btn, idx) => {
@@ -56,7 +59,7 @@ function selectQuestion(index) {
 
 function renderSolution(data) {
   const container = document.getElementById('solution-content');
-  
+
   let html = `<h2>Question ${data.question}</h2><br>`;
 
   // Render NO.1 Section

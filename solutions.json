@@ -1,80 +1,861 @@
 [
-  {
-    "question": "0001",
-    "no1": {
-      "title": "Inverse Laplace Transform",
-      "original": "F(s) = \\frac{5s^2 + 14s - 92}{(s - 8)(s^2 + 4)}",
-      "steps": [
-        {
-          "label": "1.1 Partial Fraction",
-          "equations": [
-            "F(s) = \\frac{5}{s - 8} + \\frac{14}{s^2 + 4}"
-          ]
+    {
+        "question": "0001",
+        "no1": {
+            "title": "จงหาผลการแปลงลาปลาซผกผันของ F(s) ที่กำหนดโดยใช้เศษส่วนย่อย ตามขั้นตอนต่อไปนี้",
+            "original": "F(s) = \\frac{5s^2 - 92 +14s}{(s - 8)(s^2 + 4)}",
+            "steps": [
+                {
+                    "label": "1.1 เขียน F(s) เศษส่วนย่อย <span class='text-red'>กด expand() ใช้เครื่องคิดเลข</span>",
+                    "equations": [
+                        "F(s) = \\frac{5}{(s - 8)} + \\frac{14}{(s^2 + 4)}"
+                    ]
+                },
+                {
+                    "label": "1.2 หาผลการแปลงลาปลาซของเศษส่วนย่อยในข้อ 1.1",
+                    "equations": [
+                        "f(t) = \\mathcal{L}^{-1}\\left\\{\\frac{5}{(s - 8)}\\right\\} + \\mathcal{L}^{-1}\\left\\{\\frac{14}{(s^2 + 4)}\\right\\}",
+                        "f(t) = 5\\mathcal{L}^{-1}\\left\\{\\frac{1}{(s - 8)}\\right\\} + 7\\mathcal{L}^{-1}\\left\\{\\frac{2}{(s^2 + 2^2)}\\right\\}",
+                        "f(t) = 5e^{8t} + 7\\sin(2t)"
+                    ]
+                },
+                {
+                    "label": "ตอบ",
+                    "equations": [
+                        "f(t) = 5e^{8t} + 7\\sin(2t)"
+                    ]
+                }
+            ]
         },
-        {
-          "label": "1.2 Inverse Laplace",
-          "equations": [
-            "f(t) = \\mathcal{L}^{-1}\\left\\{\\frac{5}{s - 8}\\right\\} + \\mathcal{L}^{-1}\\left\\{\\frac{14}{s^2 + 4}\\right\\}",
-            "f(t) = 5e^{8t} + 7\\sin(2t)"
-          ]
-        },
-        {
-          "label": "Final f(t)",
-          "equations": [
-            "f(t) = 5e^{8t} + 7\\sin(2t)"
-          ]
+        "no2": {
+            "title": "จงหาผลเฉลยของสมการอนุพันธ์ DE โดยใช้ผลการแปลงลาปลาซตามขั้นตอนต่อไปนี้",
+            "equation": "y'' + 4y' + 3y = -16e^t",
+            "initial_conditions": [
+                "y(0) = 1",
+                "y'(0) = -13"
+            ],
+            "steps": [
+                {
+                    "label": "2.1 หาผลการแปลงลาปลาซของสมการเชิงอนุพันธ์",
+                    "equations": [
+                        "\\mathcal{L}\\{y''\\} + 4\\mathcal{L}\\{y'\\} + 3\\mathcal{L}\\{y\\} = \\mathcal{L}\\{-16e^t\\}",
+                        "\\mathcal{L}\\{y''\\} + 4\\mathcal{L}\\{y'\\} + 3\\mathcal{L}\\{y\\} = -\\frac{16}{(s - 1)}"
+                    ]
+                },
+                {
+                    "label": "2.2 แทนค่าความสัมพันธ์  <span class='text-red'>\\(\\mathcal{L}\\{y'\\} = s\\mathcal{L}\\{y\\} - y(0)\\) และ \\(\\mathcal{L}\\{y''\\} = s^2\\mathcal{L}\\{y\\} - sy(0) - y'(0)\\)</span>",
+                    "equations": [
+                        "\\mathcal{L}\\{y''\\} + 4\\mathcal{L}\\{y'\\} + 3\\mathcal{L}\\{y\\} = -\\frac{16}{(s - 1)}",
+                        "[s^2\\mathcal{L}\\{y\\} - sy(0) - y'(0)] + 4[s\\mathcal{L}\\{y\\} - y(0)] + 3\\mathcal{L}\\{y\\} = -\\frac{16}{(s - 1)}"
+                    ]
+                },
+                {
+                    "label": "2.3 แทนค่า y(0) และ y'(0) จากเงื่อนไขเริ่มต้น",
+                    "equations": [
+                        "[s^2\\mathcal{L}\\{y\\} - s(1) - (-13)] + 4[s\\mathcal{L}\\{y\\} - (1)] + 3\\mathcal{L}\\{y\\} = -\\frac{16}{(s - 1)}",
+                        "s^2\\mathcal{L}\\{y\\} - s +13 + 4s\\mathcal{L}\\{y\\} - 4 + 3\\mathcal{L}\\{y\\} = -\\frac{16}{(s - 1)}",
+                        "(s^2+4s+3)\\mathcal{L}\\{y\\} -s +9 = -\\frac{16}{(s - 1)}",
+                        "(s^2 + 4s + 3)\\mathcal{L}\\{y\\} = -\\frac{16}{(s - 1)} + s - 9 = \\frac{-16 + s^2 - s - 9s + 9}{(s - 1)}",
+                        "(s^2 +4s + 3)\\mathcal{L}\\{y\\} = \\frac{s^2 - 10s - 7}{(s - 1)}"
+                    ]
+                },
+                {
+                    "label": "2.4 จัดรูปสมการให้อยู่ในรูป L{y}=F(s)",
+                    "equations": [
+                        "\\mathcal{L}\\{y\\} = \\frac{s^2 - 10s - 7}{(s - 1)(s^2 + 4s + 3)}"
+                    ]
+                },
+                {
+                    "label": "แยกเศษส่วนย่อย <span style='color: red; font-weight: bold;'>กด expand() ใช้เครื่องคิดเลข</span>",
+                    "equations": [
+                        "\\mathcal{L}\\{y\\} = \\frac{4}{(s + 3)} - \\frac{2}{(s - 1)} - \\frac{1}{(s + 1)}"
+                    ]
+                },
+                {
+                    "label": "2.5 หาผลเฉลย y จาก \\(\\mathcal{L}^{-1}\\{F(s)\\}\\)",
+                    "equations": [
+                        "y(t) = 4\\mathcal{L}^{-1}\\left\\{\\frac{1}{(s + 3)}\\right\\} - 2\\mathcal{L}^{-1}\\left\\{\\frac{1}{(s - 1)}\\right\\} - \\mathcal{L}^{-1}\\left\\{\\frac{1}{(s + 1)}\\right\\}"
+                    ]
+                },
+                {
+                    "label": "ตอบ",
+                    "equations": [
+                        "y(t) = 4e^{-3t} - 2e^t - e^{-t}"
+                    ]
+                }
+            ]
         }
-      ]
     },
-    "no2": {
-      "title": "Differential Equation",
-      "equation": "y'' + 4y' + 3y = -16e^t",
-      "initial_conditions": ["y(0) = 1", "y'(0) = -13"],
-      "steps": [
-        {
-          "label": "2.1 Laplace result",
-          "equations": [
-            "\\mathcal{L}\\{y'' + 4y' + 3y\\} = \\mathcal{L}\\{-16e^t\\}"
-          ]
+    {
+        "question": "0002",
+        "no1": {
+            "title": "จงหาผลการแปลงลาปลาซผกผันของ F(s) ที่กำหนดโดยใช้เศษส่วนย่อย ตามขั้นตอนต่อไปนี้",
+            "original": "F(s) = \\frac{3s^2 + 2 + 2s}{(s - 5)(s^2 + 4)}",
+            "steps": [
+                {
+                    "label": "1.1 เขียน F(s) เศษส่วนย่อย <span class='text-red'>กด expand() ใช้เครื่องคิดเลข</span>",
+                    "equations": [
+                        "F(s) = \\frac{3}{(s - 5)} + \\frac{2}{(s^2 + 4)}"
+                    ]
+                },
+                {
+                    "label": "1.2 หาผลการแปลงลาปลาซของเศษส่วนย่อยในข้อ 1.1",
+                    "equations": [
+                        "f(t) = \\mathcal{L}^{-1}\\left\\{\\frac{3}{(s - 5)}\\right\\} + \\mathcal{L}^{-1}\\left\\{\\frac{2}{(s^2 + 4)}\\right\\}",
+                        "f(t) = 3\\mathcal{L}^{-1}\\left\\{\\frac{1}{(s - 5)}\\right\\} + \\mathcal{L}^{-1}\\left\\{\\frac{2}{(s^2 + 2^2)}\\right\\}",
+                        "f(t) = 3e^{5t} + \\sin(2t)"
+                    ]
+                },
+                {
+                    "label": "ตอบ",
+                    "equations": [
+                        "f(t) = 3e^{5t} + \\sin(2t)"
+                    ]
+                }
+            ]
         },
-        {
-          "label": "2.2 Replace derivative relations",
-          "equations": [
-            "(s^2Y(s) - sy(0) - y'(0)) + 4(sY(s) - y(0)) + 3Y(s) = -\\frac{16}{s - 1}"
-          ]
-        },
-        {
-          "label": "2.3 Substitute initial conditions",
-          "equations": [
-            "(s^2Y(s) - s(1) - (-13)) + 4(sY(s) - 1) + 3Y(s) = -\\frac{16}{s - 1}",
-            "(s^2 + 4s + 3)Y(s) - s + 9 = -\\frac{16}{s - 1}"
-          ]
-        },
-        {
-          "label": "2.4 Arrange L{y}=F(s)",
-          "equations": [
-            "Y(s) = \\frac{s - 9}{s^2 + 4s + 3} - \\frac{16}{(s - 1)(s^2 + 4s + 3)}"
-          ]
-        },
-        {
-          "label": "Partial Fraction",
-          "equations": [
-            "Y(s) = \\frac{4}{s + 3} - \\frac{2}{s - 1} - \\frac{1}{s + 1}"
-          ]
-        },
-        {
-          "label": "2.5 Inverse Laplace",
-          "equations": [
-            "y(t) = 4\\mathcal{L}^{-1}\\left\\{\\frac{1}{s + 3}\\right\\} - 2\\mathcal{L}^{-1}\\left\\{\\frac{1}{s - 1}\\right\\} - \\mathcal{L}^{-1}\\left\\{\\frac{1}{s + 1}\\right\\}"
-          ]
-        },
-        {
-          "label": "Final Answer",
-          "equations": [
-            "y(t) = 4e^{-3t} - 2e^t - e^{-t}"
-          ]
+        "no2": {
+            "title": "จงหาผลเฉลยของสมการอนุพันธ์ DE โดยใช้ผลการแปลงลาปลาซตามขั้นตอนต่อไปนี้",
+            "equation": "y'' - y' - 2y = 4",
+            "initial_conditions": [
+                "y(0) = 0",
+                "y'(0) = -5"
+            ],
+            "steps": [
+                {
+                    "label": "2.1 หาผลการแปลงลาปลาซของสมการเชิงอนุพันธ์",
+                    "equations": [
+                        "\\mathcal{L}\\{y''\\} - \\mathcal{L}\\{y'\\} - 2\\mathcal{L}\\{y\\} = \\mathcal{L}\\{4\\}",
+                        "\\mathcal{L}\\{y''\\} - \\mathcal{L}\\{y'\\} - 2\\mathcal{L}\\{y\\} = \\frac{4}{s}"
+                    ]
+                },
+                {
+                    "label": "2.2 แทนค่าความสัมพันธ์ <span class='text-red'>\\(\\mathcal{L}\\{y'\\} = s\\mathcal{L}\\{y\\} - y(0)\\) และ \\(\\mathcal{L}\\{y''\\} = s^2\\mathcal{L}\\{y\\} - sy(0) - y'(0)\\)</span>",
+                    "equations": [
+                        "[s^2\\mathcal{L}\\{y\\} - sy(0) - y'(0)] - [s\\mathcal{L}\\{y\\} - y(0)] - 2\\mathcal{L}\\{y\\} = \\frac{4}{s}"
+                    ]
+                },
+                {
+                    "label": "2.3 แทนค่า y(0) และ y'(0) จากเงื่อนไขเริ่มต้น",
+                    "equations": [
+                        "[s^2\\mathcal{L}\\{y\\} - s(0) - (-5)] - [s\\mathcal{L}\\{y\\} - 0] - 2\\mathcal{L}\\{y\\} = \\frac{4}{s}",
+                        "(s^2 - s - 2)\\mathcal{L}\\{y\\} + 5 = \\frac{4}{s}",
+                        "(s^2 - s - 2)\\mathcal{L}\\{y\\} = \\frac{4}{s} - 5 = \\frac{4 - 5s}{s}"
+                    ]
+                },
+                {
+                    "label": "2.4 จัดรูปสมการให้อยู่ในรูป L{y}=F(s)",
+                    "equations": [
+                        "\\mathcal{L}\\{y\\} = \\frac{4 - 5s}{(s)(s^2 - s - 2)}"
+                    ]
+                },
+                {
+                    "label": "แยกเศษส่วนย่อย <span style='color: red; font-weight: bold;'>กด expand() ใช้เครื่องคิดเลข</span>",
+                    "equations": [
+                        "\\mathcal{L}\\{y\\} = -\\frac{2}{s} + \\frac{3}{(s + 1)} - \\frac{1}{(s - 2)}"
+                    ]
+                },
+                {
+                    "label": "2.5 หาผลเฉลย y จาก \\(\\mathcal{L}^{-1}\\{F(s)\\}\\)",
+                    "equations": [
+                        "y(t) = -2\\mathcal{L}^{-1}\\left\\{\\frac{1}{s}\\right\\} + 3\\mathcal{L}^{-1}\\left\\{\\frac{1}{(s + 1)}\\right\\} - \\mathcal{L}^{-1}\\left\\{\\frac{1}{(s - 2)}\\right\\}"
+                    ]
+                },
+                {
+                    "label": "ตอบ",
+                    "equations": [
+                        "y(t) = -2 + 3e^{-t} - e^{2t}"
+                    ]
+                }
+            ]
         }
-      ]
+    },
+    {
+        "question": "0003",
+        "no1": {
+            "title": "จงหาผลการแปลงลาปลาซผกผันของ F(s) ที่กำหนดโดยใช้เศษส่วนย่อย ตามขั้นตอนต่อไปนี้",
+            "original": "F(s) = \\frac{9s^2 + 110s + 280}{(s^3 +13s^2 +40s)}",
+            "steps": [
+                {
+                    "label": "1.1 เขียน F(s) เศษส่วนย่อย <span class='text-red'>กด expand() ใช้เครื่องคิดเลข</span>",
+                    "equations": [
+                        "F(s) = \\frac{7}{(s)} + \\frac{3}{(s+5)} - \\frac{1}{(s+8)}"
+                    ]
+                },
+                {
+                    "label": "1.2 หาผลการแปลงลาปลาซของเศษส่วนย่อยในข้อ 1.1",
+                    "equations": [
+                        "f(t) = \\mathcal{L}^{-1}\\left\\{\\frac{7}{(s)}\\right\\} + \\mathcal{L}^{-1}\\left\\{\\frac{3}{(s+5)}\\right\\} - \\mathcal{L}^{-1}\\left\\{\\frac{1}{(s+8)}\\right\\}",
+                        "f(t) = 7\\mathcal{L}^{-1}\\left\\{\\frac{1}{(s)}\\right\\} + 3\\mathcal{L}^{-1}\\left\\{\\frac{1}{(s+5)}\\right\\} - \\mathcal{L}^{-1}\\left\\{\\frac{1}{(s+8)}\\right\\}",
+                        "f(t) = 7 + 3e^{-5t} - e^{-8t}"
+                    ]
+                },
+                {
+                    "label": "ตอบ",
+                    "equations": [
+                        "f(t) = 7 + 3e^{-5t} - e^{-8t}"
+                    ]
+                }
+            ]
+        },
+        "no2": {
+            "title": "จงหาผลเฉลยของสมการอนุพันธ์ DE โดยใช้ผลการแปลงลาปลาซตามขั้นตอนต่อไปนี้",
+            "equation": "y'' + y = 2",
+            "initial_conditions": [
+                "y(0) = 5",
+                "y'(0) = -1"
+            ],
+            "steps": [
+                {
+                    "label": "2.1 หาผลการแปลงลาปลาซของสมการเชิงอนุพันธ์",
+                    "equations": [
+                        "\\mathcal{L}\\{y''\\} + \\mathcal{L}\\{y\\} = \\mathcal{L}\\{2\\}",
+                        "\\mathcal{L}\\{y''\\} + \\mathcal{L}\\{y\\} = \\frac{2}{s}"
+                    ]
+                },
+                {
+                    "label": "2.2 แทนค่าความสัมพันธ์ <span class='text-red'>\\(\\mathcal{L}\\{y'\\} = s\\mathcal{L}\\{y\\} - y(0)\\) และ \\(\\mathcal{L}\\{y''\\} = s^2\\mathcal{L}\\{y\\} - sy(0) - y'(0)\\)</span>",
+                    "equations": [
+                        "\\mathcal{L}\\{y''\\} + \\mathcal{L}\\{y\\} = \\frac{2}{s}",
+                        "[s^2\\mathcal{L}\\{y\\} - sy(0) - y'(0)] + \\mathcal{L}\\{y\\} = \\frac{2}{s}"
+                    ]
+                },
+                {
+                    "label": "2.3 แทนค่า y(0) และ y'(0) จากเงื่อนไขเริ่มต้น",
+                    "equations": [
+                        "[s^2\\mathcal{L}\\{y\\} - s(5) - (-1)] + \\mathcal{L}\\{y\\} = \\frac{2}{s}",
+                        "s^2\\mathcal{L}\\{y\\} - 5s + 1 + \\mathcal{L}\\{y\\} = \\frac{2}{s}",
+                        "(s^2 + 1)\\mathcal{L}\\{y\\} = \\frac{2}{s} + 5s - 1 = \\frac{2 + 5s^2 - s}{s}"
+                    ]
+                },
+                {
+                    "label": "2.4 จัดรูปสมการให้อยู่ในรูป L{y}=F(s)",
+                    "equations": [
+                        "\\mathcal{L}\\{y\\} = \\frac{5s^2 -s +2}{(s)(s^2 + 1)}"
+                    ]
+                },
+                {
+                    "label": "แยกเศษส่วนย่อย <span style='color: red; font-weight: bold;'>กด expand() ใช้เครื่องคิดเลข</span>",
+                    "equations": [
+                        "\\mathcal{L}\\{y\\} = \\frac{3s}{(s^2 + 1)} + \\frac{-1}{(s^2+1)} + \\frac{2}{s}"
+                    ]
+                },
+                {
+                    "label": "2.5 หาผลเฉลย y จาก \\(\\mathcal{L}^{-1}\\{F(s)\\}\\)",
+                    "equations": [
+                        "y(t) = 3\\mathcal{L}^{-1}\\left\\{\\frac{s}{s^2 + 1}\\right\\} - \\mathcal{L}^{-1}\\left\\{\\frac{1}{s^2+1}\\right\\} + 2\\mathcal{L}^{-1}\\left\\{\\frac{1}{s}\\right\\}",
+                        "y(t) = 3\\mathcal{L}^{-1}\\left\\{\\frac{s}{s^2 + 1^2}\\right\\} - \\mathcal{L}^{-1}\\left\\{\\frac{1}{s^2+1^2}\\right\\} + 2\\mathcal{L}^{-1}\\left\\{\\frac{1}{s}\\right\\}"
+                    ]
+                },
+                {
+                    "label": "ตอบ",
+                    "equations": [
+                        "y(t) = 3\\cos(t) - \\sin(t) + 2"
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "question": "0004",
+        "no1": {
+            "title": "จงหาผลการแปลงลาปลาซผกผันของ F(s) ที่กำหนดโดยใช้เศษส่วนย่อย ตามขั้นตอนต่อไปนี้",
+            "original": "F(s) = \\frac{21s^2 + 156s + 144}{s^3 + 10s^2 + 16s}",
+            "steps": [
+                {
+                    "label": "1.1 เขียน F(s) เศษส่วนย่อย <span class='text-red'>กด expand() ใช้เครื่องคิดเลข</span>",
+                    "equations": [
+                        "F(s) = \\frac{9}{s} + \\frac{7}{(s + 2)} + \\frac{5}{(s + 8)}"
+                    ]
+                },
+                {
+                    "label": "1.2 หาผลการแปลงลาปลาซของเศษส่วนย่อยในข้อ 1.1",
+                    "equations": [
+                        "f(t) = \\mathcal{L}^{-1}\\left\\{\\frac{9}{s}\\right\\} + \\mathcal{L}^{-1}\\left\\{\\frac{7}{(s + 2)}\\right\\} + \\mathcal{L}^{-1}\\left\\{\\frac{5}{(s + 8)}\\right\\}",
+                        "f(t) = 9\\mathcal{L}^{-1}\\left\\{\\frac{1}{s}\\right\\} + 7\\mathcal{L}^{-1}\\left\\{\\frac{1}{(s + 2)}\\right\\} + 5\\mathcal{L}^{-1}\\left\\{\\frac{1}{(s + 8)}\\right\\}",
+                        "f(t) = 9 + 7e^{-2t} + 5e^{-8t}"
+                    ]
+                },
+                {
+                    "label": "ตอบ",
+                    "equations": [
+                        "f(t) = 9 + 7e^{-2t} + 5e^{-8t}"
+                    ]
+                }
+            ]
+        },
+        "no2": {
+            "title": "จงหาผลเฉลยของสมการอนุพันธ์ DE โดยใช้ผลการแปลงลาปลาซตามขั้นตอนต่อไปนี้",
+            "equation": "y'' + 9y = 27",
+            "initial_conditions": [
+                "y(0) = 8",
+                "y'(0) = -3"
+            ],
+            "steps": [
+                {
+                    "label": "2.1 หาผลการแปลงลาปลาซของสมการเชิงอนุพันธ์",
+                    "equations": [
+                        "\\mathcal{L}\\{y''\\} + 9\\mathcal{L}\\{y\\} = \\mathcal{L}\\{27\\}",
+                        "\\mathcal{L}\\{y''\\} + 9\\mathcal{L}\\{y\\} = \\frac{27}{s}"
+                    ]
+                },
+                {
+                    "label": "2.2 แทนค่าความสัมพันธ์ <span class='text-red'>\\(\\mathcal{L}\\{y'\\} = s\\mathcal{L}\\{y\\} - y(0)\\) และ \\(\\mathcal{L}\\{y''\\} = s^2\\mathcal{L}\\{y\\} - sy(0) - y'(0)\\)</span>",
+                    "equations": [
+                        "\\mathcal{L}\\{y''\\} + 9\\mathcal{L}\\{y\\} = \\frac{27}{s}",
+                        "[s^2\\mathcal{L}\\{y\\} - sy(0) - y'(0)] + 9\\mathcal{L}\\{y\\} = \\frac{27}{s}"
+                    ]
+                },
+                {
+                    "label": "2.3 แทนค่า y(0) และ y'(0) จากเงื่อนไขเริ่มต้น",
+                    "equations": [
+                        "[s^2\\mathcal{L}\\{y\\} - s(8) - (-3)] + 9\\mathcal{L}\\{y\\} = \\frac{27}{s}",
+                        "s^2\\mathcal{L}\\{y\\} - 8s + 3 + 9\\mathcal{L}\\{y\\} = \\frac{27}{s}",
+                        "(s^2 + 9)\\mathcal{L}\\{y\\} - 8s + 3 = \\frac{27}{s}",
+                        "(s^2 + 9)\\mathcal{L}\\{y\\} = \\frac{27}{s} + 8s - 3 = \\frac{27 + 8s^2 - 3s}{s}",
+                        "(s^2 + 9)\\mathcal{L}\\{y\\} = \\frac{8s^2 - 3s + 27}{s}"
+                    ]
+                },
+                {
+                    "label": "2.4 จัดรูปสมการให้อยู่ในรูป L{y}=F(s)",
+                    "equations": [
+                        "\\mathcal{L}\\{y\\} = \\frac{8s^2 - 3s + 27}{(s)(s^2 + 9)}"
+                    ]
+                },
+                {
+                    "label": "แยกเศษส่วนย่อย <span style='color: red; font-weight: bold;'>กด expand() ใช้เครื่องคิดเลข</span>",
+                    "equations": [
+                        "\\mathcal{L}\\{y\\} = \\frac{3}{s} + \\frac{5s}{(s^2 + 9)} - \\frac{3}{(s^2 + 9)}"
+                    ]
+                },
+                {
+                    "label": "2.5 หาผลเฉลย y จาก \\(\\mathcal{L}^{-1}\\{F(s)\\}\\)",
+                    "equations": [
+                        "y(t) = 3\\mathcal{L}^{-1}\\left\\{\\frac{1}{s}\\right\\} + 5\\mathcal{L}^{-1}\\left\\{\\frac{s}{s^2 + 3^2}\\right\\} - \\mathcal{L}^{-1}\\left\\{\\frac{3}{s^2 + 3^2}\\right\\}"
+                    ]
+                },
+                {
+                    "label": "ตอบ",
+                    "equations": [
+                        "y(t) = 3 + 5\\cos(3t) - \\sin(3t)"
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "question": "0005",
+        "no1": {
+            "title": "จงหาผลการแปลงลาปลาซผกผันของ F(s) ที่กำหนดโดยใช้เศษส่วนย่อย ตามขั้นตอนต่อไปนี้",
+            "original": "F(s) = \\frac{9s^2 + 44 + 2s}{(s + 4)(s^2 + 4)}",
+            "steps": [
+                {
+                    "label": "1.1 เขียน F(s) เศษส่วนย่อย <span class='text-red'>กด expand() ใช้เครื่องคิดเลข</span>",
+                    "equations": [
+                        "F(s) = \\frac{9}{(s + 4)} + \\frac{2}{(s^2 + 4)}"
+                    ]
+                },
+                {
+                    "label": "1.2 หาผลการแปลงลาปลาซของเศษส่วนย่อยในข้อ 1.1",
+                    "equations": [
+                        "f(t) = \\mathcal{L}^{-1}\\left\\{\\frac{9}{(s + 4)}\\right\\} + \\mathcal{L}^{-1}\\left\\{\\frac{2}{(s^2 + 4)}\\right\\}",
+                        "f(t) = 9\\mathcal{L}^{-1}\\left\\{\\frac{1}{(s + 4)}\\right\\} + \\mathcal{L}^{-1}\\left\\{\\frac{2}{(s^2 + 2^2)}\\right\\}",
+                        "f(t) = 9e^{-4t} + \\sin(2t)"
+                    ]
+                },
+                {
+                    "label": "ตอบ",
+                    "equations": [
+                        "f(t) = 9e^{-4t} + \\sin(2t)"
+                    ]
+                }
+            ]
+        },
+        "no2": {
+            "title": "จงหาผลเฉลยของสมการอนุพันธ์ DE โดยใช้ผลการแปลงลาปลาซตามขั้นตอนต่อไปนี้",
+            "equation": "y'' - y' - 20y = -80",
+            "initial_conditions": [
+                "y(0) = 10",
+                "y'(0) = -33"
+            ],
+            "steps": [
+                {
+                    "label": "2.1 หาผลการแปลงลาปลาซของสมการเชิงอนุพันธ์",
+                    "equations": [
+                        "\\mathcal{L}\\{y''\\} - \\mathcal{L}\\{y'\\} - 20\\mathcal{L}\\{y\\} = \\mathcal{L}\\{-80\\}",
+                        "\\mathcal{L}\\{y''\\} - \\mathcal{L}\\{y'\\} - 20\\mathcal{L}\\{y\\} = -\\frac{80}{s}"
+                    ]
+                },
+                {
+                    "label": "2.2 แทนค่าความสัมพันธ์ <span class='text-red'>\\(\\mathcal{L}\\{y'\\} = s\\mathcal{L}\\{y\\} - y(0)\\) และ \\(\\mathcal{L}\\{y''\\} = s^2\\mathcal{L}\\{y\\} - sy(0) - y'(0)\\)</span>",
+                    "equations": [
+                        "[s^2\\mathcal{L}\\{y\\} - sy(0) - y'(0)] - [s\\mathcal{L}\\{y\\} - y(0)] - 20\\mathcal{L}\\{y\\} = -\\frac{80}{s}"
+                    ]
+                },
+                {
+                    "label": "2.3 แทนค่า y(0) และ y'(0) จากเงื่อนไขเริ่มต้น",
+                    "equations": [
+                        "[s^2\\mathcal{L}\\{y\\} - s(10) - (-33)] - [s\\mathcal{L}\\{y\\} - (10)] - 20\\mathcal{L}\\{y\\} = -\\frac{80}{s}",
+                        "s^2\\mathcal{L}\\{y\\} - 10s + 33 - s\\mathcal{L}\\{y\\} + 10 - 20\\mathcal{L}\\{y\\} = -\\frac{80}{s}",
+                        "(s^2 - s - 20)\\mathcal{L}\\{y\\} - 10s + 43 = -\\frac{80}{s}",
+                        "(s^2 - s - 20)\\mathcal{L}\\{y\\} = -\\frac{80}{s} + 10s - 43 = \\frac{-80 + 10s^2 - 43s}{s}",
+                        "(s^2 - s - 20)\\mathcal{L}\\{y\\} = \\frac{10s^2 - 43s - 80}{s}"
+                    ]
+                },
+                {
+                    "label": "2.4 จัดรูปสมการให้อยู่ในรูป L{y}=F(s)",
+                    "equations": [
+                        "\\mathcal{L}\\{y\\} = \\frac{10s^2 - 43s - 80}{(s)(s^2 - s - 20)}"
+                    ]
+                },
+                {
+                    "label": "แยกเศษส่วนย่อย <span style='color: red; font-weight: bold;'>กด expand() ใช้เครื่องคิดเลข</span>",
+                    "equations": [
+                        "\\mathcal{L}\\{y\\} = \\frac{4}{s} - \\frac{1}{(s - 5)} + \\frac{7}{(s + 4)}"
+                    ]
+                },
+                {
+                    "label": "2.5 หาผลเฉลย y จาก \\(\\mathcal{L}^{-1}\\{F(s)\\}\\)",
+                    "equations": [
+                        "y(t) = 4\\mathcal{L}^{-1}\\left\\{\\frac{1}{s}\\right\\} - \\mathcal{L}^{-1}\\left\\{\\frac{1}{(s - 5)}\\right\\} + 7\\mathcal{L}^{-1}\\left\\{\\frac{1}{(s + 4)}\\right\\}"
+                    ]
+                },
+                {
+                    "label": "ตอบ",
+                    "equations": [
+                        "y(t) = 4 - e^{5t} + 7e^{-4t}"
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "question": "0006",
+        "no1": {
+            "title": "จงหาผลการแปลงลาปลาซผกผันของ F(s) ที่กำหนดโดยใช้เศษส่วนย่อย ตามขั้นตอนต่อไปนี้",
+            "original": "F(s) = \\frac{s^2 - 119 - 56s}{(s + 3)(s^2 + 49)}",
+            "steps": [
+                {
+                    "label": "1.1 เขียน F(s) เศษส่วนย่อย <span class='text-red'>กด expand() ใช้เครื่องคิดเลข</span>",
+                    "equations": [
+                        "F(s) = \\frac{1}{(s + 3)} - \\frac{56}{(s^2 + 49)}"
+                    ]
+                },
+                {
+                    "label": "1.2 หาผลการแปลงลาปลาซของเศษส่วนย่อยในข้อ 1.1",
+                    "equations": [
+                        "f(t) = \\mathcal{L}^{-1}\\left\\{\\frac{1}{(s + 3)}\\right\\} - \\mathcal{L}^{-1}\\left\\{\\frac{56}{(s^2 + 49)}\\right\\}",
+                        "f(t) = \\mathcal{L}^{-1}\\left\\{\\frac{1}{(s + 3)}\\right\\} - 8\\mathcal{L}^{-1}\\left\\{\\frac{7}{(s^2 + 7^2)}\\right\\}",
+                        "f(t) = e^{-3t} - 8\\sin(7t)"
+                    ]
+                },
+                {
+                    "label": "ตอบ",
+                    "equations": [
+                        "f(t) = e^{-3t} - 8\\sin(7t)"
+                    ]
+                }
+            ]
+        },
+        "no2": {
+            "title": "จงหาผลเฉลยของสมการอนุพันธ์ DE โดยใช้ผลการแปลงลาปลาซตามขั้นตอนต่อไปนี้",
+            "equation": "y'' - 2y' - 15y = -30",
+            "initial_conditions": [
+                "y(0) = 7",
+                "y'(0) = -7"
+            ],
+            "steps": [
+                {
+                    "label": "2.1 หาผลการแปลงลาปลาซของสมการเชิงอนุพันธ์",
+                    "equations": [
+                        "\\mathcal{L}\\{y''\\} - 2\\mathcal{L}\\{y'\\} - 15\\mathcal{L}\\{y\\} = \\mathcal{L}\\{-30\\}",
+                        "\\mathcal{L}\\{y''\\} - 2\\mathcal{L}\\{y'\\} - 15\\mathcal{L}\\{y\\} = -\\frac{30}{s}"
+                    ]
+                },
+                {
+                    "label": "2.2 แทนค่าความสัมพันธ์ <span class='text-red'>\\(\\mathcal{L}\\{y'\\} = s\\mathcal{L}\\{y\\} - y(0)\\) และ \\(\\mathcal{L}\\{y''\\} = s^2\\mathcal{L}\\{y\\} - sy(0) - y'(0)\\)</span>",
+                    "equations": [
+                        "[s^2\\mathcal{L}\\{y\\} - sy(0) - y'(0)] - 2[s\\mathcal{L}\\{y\\} - y(0)] - 15\\mathcal{L}\\{y\\} = -\\frac{30}{s}"
+                    ]
+                },
+                {
+                    "label": "2.3 แทนค่า y(0) และ y'(0) จากเงื่อนไขเริ่มต้น",
+                    "equations": [
+                        "[s^2\\mathcal{L}\\{y\\} - s(7) - (-7)] - 2[s\\mathcal{L}\\{y\\} - (7)] - 15\\mathcal{L}\\{y\\} = -\\frac{30}{s}",
+                        "s^2\\mathcal{L}\\{y\\} - 7s + 7 - 2s\\mathcal{L}\\{y\\} + 14 - 15\\mathcal{L}\\{y\\} = -\\frac{30}{s}",
+                        "(s^2 - 2s - 15)\\mathcal{L}\\{y\\} - 7s + 21 = -\\frac{30}{s}",
+                        "(s^2 - 2s - 15)\\mathcal{L}\\{y\\} = -\\frac{30}{s} + 7s - 21 = \\frac{-30 + 7s^2 - 21s}{s}",
+                        "(s^2 - 2s - 15)\\mathcal{L}\\{y\\} = \\frac{7s^2 - 21s - 30}{s}"
+                    ]
+                },
+                {
+                    "label": "2.4 จัดรูปสมการให้อยู่ในรูป L{y}=F(s)",
+                    "equations": [
+                        "\\mathcal{L}\\{y\\} = \\frac{7s^2 - 21s - 30}{(s)(s^2 - 2s - 15)}"
+                    ]
+                },
+                {
+                    "label": "แยกเศษส่วนย่อย <span style='color: red; font-weight: bold;'>กด expand() ใช้เครื่องคิดเลข</span>",
+                    "equations": [
+                        "\\mathcal{L}\\{y\\} = \\frac{2}{s} + \\frac{1}{(s - 5)} + \\frac{4}{(s + 3)}"
+                    ]
+                },
+                {
+                    "label": "2.5 หาผลเฉลย y จาก \\(\\mathcal{L}^{-1}\\{F(s)\\}\\)",
+                    "equations": [
+                        "y(t) = 2\\mathcal{L}^{-1}\\left\\{\\frac{1}{s}\\right\\} + \\mathcal{L}^{-1}\\left\\{\\frac{1}{(s - 5)}\\right\\} + 4\\mathcal{L}^{-1}\\left\\{\\frac{1}{(s + 3)}\\right\\}"
+                    ]
+                },
+                {
+                    "label": "ตอบ",
+                    "equations": [
+                        "y(t) = 2 + e^{5t} + 4e^{-3t}"
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "question": "0007",
+        "no1": {
+            "title": "จงหาผลการแปลงลาปลาซผกผันของ F(s) ที่กำหนดโดยใช้เศษส่วนย่อย ตามขั้นตอนต่อไปนี้",
+            "original": "F(s) = \\frac{3s^2 - 53s + 252}{s^3 - 16s^2 + 63s}",
+            "steps": [
+                {
+                    "label": "1.1 เขียน F(s) เศษส่วนย่อย <span class='text-red'>กด expand() ใช้เครื่องคิดเลข</span>",
+                    "equations": [
+                        "F(s) = \\frac{4}{s} - \\frac{2}{(s - 7)} + \\frac{1}{(s - 9)}"
+                    ]
+                },
+                {
+                    "label": "1.2 หาผลการแปลงลาปลาซของเศษส่วนย่อยในข้อ 1.1",
+                    "equations": [
+                        "f(t) = \\mathcal{L}^{-1}\\left\\{\\frac{4}{s}\\right\\} - \\mathcal{L}^{-1}\\left\\{\\frac{2}{(s - 7)}\\right\\} + \\mathcal{L}^{-1}\\left\\{\\frac{1}{(s - 9)}\\right\\}",
+                        "f(t) = 4\\mathcal{L}^{-1}\\left\\{\\frac{1}{s}\\right\\} - 2\\mathcal{L}^{-1}\\left\\{\\frac{1}{(s - 7)}\\right\\} + \\mathcal{L}^{-1}\\left\\{\\frac{1}{(s - 9)}\\right\\}",
+                        "f(t) = 4 - 2e^{7t} + e^{9t}"
+                    ]
+                },
+                {
+                    "label": "ตอบ",
+                    "equations": [
+                        "f(t) = 4 - 2e^{7t} + e^{9t}"
+                    ]
+                }
+            ]
+        },
+        "no2": {
+            "title": "จงหาผลเฉลยของสมการอนุพันธ์ DE โดยใช้ผลการแปลงลาปลาซตามขั้นตอนต่อไปนี้",
+            "equation": "y'' + 25y = 25",
+            "initial_conditions": [
+                "y(0) = 4",
+                "y'(0) = 5"
+            ],
+            "steps": [
+                {
+                    "label": "2.1 หาผลการแปลงลาปลาซของสมการเชิงอนุพันธ์",
+                    "equations": [
+                        "\\mathcal{L}\\{y''\\} + 25\\mathcal{L}\\{y\\} = \\mathcal{L}\\{25\\}",
+                        "\\mathcal{L}\\{y''\\} + 25\\mathcal{L}\\{y\\} = \\frac{25}{s}"
+                    ]
+                },
+                {
+                    "label": "2.2 แทนค่าความสัมพันธ์ <span class='text-red'>\\(\\mathcal{L}\\{y'\\} = s\\mathcal{L}\\{y\\} - y(0)\\) และ \\(\\mathcal{L}\\{y''\\} = s^2\\mathcal{L}\\{y\\} - sy(0) - y'(0)\\)</span>",
+                    "equations": [
+                        "[s^2\\mathcal{L}\\{y\\} - sy(0) - y'(0)] + 25\\mathcal{L}\\{y\\} = \\frac{25}{s}"
+                    ]
+                },
+                {
+                    "label": "2.3 แทนค่า y(0) และ y'(0) จากเงื่อนไขเริ่มต้น",
+                    "equations": [
+                        "[s^2\\mathcal{L}\\{y\\} - s(4) - (5)] + 25\\mathcal{L}\\{y\\} = \\frac{25}{s}",
+                        "s^2\\mathcal{L}\\{y\\} - 4s - 5 + 25\\mathcal{L}\\{y\\} = \\frac{25}{s}",
+                        "(s^2 + 25)\\mathcal{L}\\{y\\} - 4s - 5 = \\frac{25}{s}",
+                        "(s^2 + 25)\\mathcal{L}\\{y\\} = \\frac{25}{s} + 4s + 5 = \\frac{25 + 4s^2 + 5s}{s}",
+                        "(s^2 + 25)\\mathcal{L}\\{y\\} = \\frac{4s^2 + 5s + 25}{s}"
+                    ]
+                },
+                {
+                    "label": "2.4 จัดรูปสมการให้อยู่ในรูป L{y}=F(s)",
+                    "equations": [
+                        "\\mathcal{L}\\{y\\} = \\frac{4s^2 + 5s + 25}{(s)(s^2 + 25)}"
+                    ]
+                },
+                {
+                    "label": "แยกเศษส่วนย่อย <span style='color: red; font-weight: bold;'>กด expand() ใช้เครื่องคิดเลข</span>",
+                    "equations": [
+                        "\\mathcal{L}\\{y\\} = \\frac{1}{s} + \\frac{3s}{(s^2 + 25)} + \\frac{5}{(s^2 + 25)}"
+                    ]
+                },
+                {
+                    "label": "2.5 หาผลเฉลย y จาก \\(\\mathcal{L}^{-1}\\{F(s)\\}\\)",
+                    "equations": [
+                        "y(t) = \\mathcal{L}^{-1}\\left\\{\\frac{1}{s}\\right\\} + 3\\mathcal{L}^{-1}\\left\\{\\frac{s}{s^2 + 5^2}\\right\\} + \\mathcal{L}^{-1}\\left\\{\\frac{5}{s^2 + 5^2}\\right\\}"
+                    ]
+                },
+                {
+                    "label": "ตอบ",
+                    "equations": [
+                        "y(t) = 1 + 3\\cos(5t) + \\sin(5t)"
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "question": "0008",
+        "no1": {
+            "title": "จงหาผลการแปลงลาปลาซผกผันของ F(s) ที่กำหนดโดยใช้เศษส่วนย่อย ตามขั้นตอนต่อไปนี้",
+            "original": "F(s) = \\frac{7s^2 + 144 + 3s}{(s + 1)(s^2 + 36)}",
+            "steps": [
+                {
+                    "label": "1.1 เขียน F(s) เศษส่วนย่อย <span class='text-red'>กด expand() ใช้เครื่องคิดเลข</span>",
+                    "equations": [
+                        "F(s) = \\frac{4}{(s + 1)} + \\frac{3s}{(s^2 + 36)}"
+                    ]
+                },
+                {
+                    "label": "1.2 หาผลการแปลงลาปลาซของเศษส่วนย่อยในข้อ 1.1",
+                    "equations": [
+                        "f(t) = \\mathcal{L}^{-1}\\left\\{\\frac{4}{(s + 1)}\\right\\} + \\mathcal{L}^{-1}\\left\\{\\frac{3s}{(s^2 + 36)}\\right\\}",
+                        "f(t) = 4\\mathcal{L}^{-1}\\left\\{\\frac{1}{(s + 1)}\\right\\} + 3\\mathcal{L}^{-1}\\left\\{\\frac{s}{(s^2 + 6^2)}\\right\\}",
+                        "f(t) = 4e^{-t} + 3\\cos(6t)"
+                    ]
+                },
+                {
+                    "label": "ตอบ",
+                    "equations": [
+                        "f(t) = 4e^{-t} + 3\\cos(6t)"
+                    ]
+                }
+            ]
+        },
+        "no2": {
+            "title": "จงหาผลเฉลยของสมการอนุพันธ์ DE โดยใช้ผลการแปลงลาปลาซตามขั้นตอนต่อไปนี้",
+            "equation": "y'' + 2y' - 8y = -24",
+            "initial_conditions": [
+                "y(0) = 9",
+                "y'(0) = -18"
+            ],
+            "steps": [
+                {
+                    "label": "2.1 หาผลการแปลงลาปลาซของสมการเชิงอนุพันธ์",
+                    "equations": [
+                        "\\mathcal{L}\\{y''\\} + 2\\mathcal{L}\\{y'\\} - 8\\mathcal{L}\\{y\\} = \\mathcal{L}\\{-24\\}",
+                        "\\mathcal{L}\\{y''\\} + 2\\mathcal{L}\\{y'\\} - 8\\mathcal{L}\\{y\\} = -\\frac{24}{s}"
+                    ]
+                },
+                {
+                    "label": "2.2 แทนค่าความสัมพันธ์ <span class='text-red'>\\(\\mathcal{L}\\{y'\\} = s\\mathcal{L}\\{y\\} - y(0)\\) และ \\(\\mathcal{L}\\{y''\\} = s^2\\mathcal{L}\\{y\\} - sy(0) - y'(0)\\)</span>",
+                    "equations": [
+                        "[s^2\\mathcal{L}\\{y\\} - sy(0) - y'(0)] + 2[s\\mathcal{L}\\{y\\} - y(0)] - 8\\mathcal{L}\\{y\\} = -\\frac{24}{s}"
+                    ]
+                },
+                {
+                    "label": "2.3 แทนค่า y(0) และ y'(0) จากเงื่อนไขเริ่มต้น",
+                    "equations": [
+                        "[s^2\\mathcal{L}\\{y\\} - s(9) - (-18)] + 2[s\\mathcal{L}\\{y\\} - (9)] - 8\\mathcal{L}\\{y\\} = -\\frac{24}{s}",
+                        "s^2\\mathcal{L}\\{y\\} - 9s + 18 + 2s\\mathcal{L}\\{y\\} - 18 - 8\\mathcal{L}\\{y\\} = -\\frac{24}{s}",
+                        "(s^2 + 2s - 8)\\mathcal{L}\\{y\\} - 9s = -\\frac{24}{s}",
+                        "(s^2 + 2s - 8)\\mathcal{L}\\{y\\} = -\\frac{24}{s} + 9s = \\frac{9s^2 - 24}{s}"
+                    ]
+                },
+                {
+                    "label": "2.4 จัดรูปสมการให้อยู่ในรูป L{y}=F(s)",
+                    "equations": [
+                        "\\mathcal{L}\\{y\\} = \\frac{9s^2 - 24}{(s)(s^2 + 2s - 8)}"
+                    ]
+                },
+                {
+                    "label": "แยกเศษส่วนย่อย <span style='color: red; font-weight: bold;'>กด expand() ใช้เครื่องคิดเลข</span>",
+                    "equations": [
+                        "\\mathcal{L}\\{y\\} = \\frac{3}{s} + \\frac{1}{(s - 2)} + \\frac{5}{(s + 4)}"
+                    ]
+                },
+                {
+                    "label": "2.5 หาผลเฉลย y จาก \\(\\mathcal{L}^{-1}\\{F(s)\\}\\)",
+                    "equations": [
+                        "y(t) = 3\\mathcal{L}^{-1}\\left\\{\\frac{1}{s}\\right\\} + \\mathcal{L}^{-1}\\left\\{\\frac{1}{(s - 2)}\\right\\} + 5\\mathcal{L}^{-1}\\left\\{\\frac{1}{(s + 4)}\\right\\}"
+                    ]
+                },
+                {
+                    "label": "ตอบ",
+                    "equations": [
+                        "y(t) = 3 + e^{2t} + 5e^{-4t}"
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "question": "0009",
+        "no1": {
+            "title": "จงหาผลการแปลงลาปลาซผกผันของ F(s) ที่กำหนดโดยใช้เศษส่วนย่อย ตามขั้นตอนต่อไปนี้",
+            "original": "F(s) = \\frac{2s^2 - 160 + 35s}{(s - 6)(s^2 + 25)}",
+            "steps": [
+                {
+                    "label": "1.1 เขียน F(s) เศษส่วนย่อย <span class='text-red'>กด expand() ใช้เครื่องคิดเลข</span>",
+                    "equations": [
+                        "F(s) = \\frac{2}{(s - 6)} + \\frac{35}{(s^2 + 25)}"
+                    ]
+                },
+                {
+                    "label": "1.2 หาผลการแปลงลาปลาซของเศษส่วนย่อยในข้อ 1.1",
+                    "equations": [
+                        "f(t) = \\mathcal{L}^{-1}\\left\\{\\frac{2}{(s - 6)}\\right\\} + \\mathcal{L}^{-1}\\left\\{\\frac{35}{(s^2 + 25)}\\right\\}",
+                        "f(t) = 2\\mathcal{L}^{-1}\\left\\{\\frac{1}{(s - 6)}\\right\\} + 7\\mathcal{L}^{-1}\\left\\{\\frac{5}{(s^2 + 5^2)}\\right\\}",
+                        "f(t) = 2e^{6t} + 7\\sin(5t)"
+                    ]
+                },
+                {
+                    "label": "ตอบ",
+                    "equations": [
+                        "f(t) = 2e^{6t} + 7\\sin(5t)"
+                    ]
+                }
+            ]
+        },
+        "no2": {
+            "title": "จงหาผลเฉลยของสมการอนุพันธ์ DE โดยใช้ผลการแปลงลาปลาซตามขั้นตอนต่อไปนี้",
+            "equation": "y'' - y' - 6y = 6",
+            "initial_conditions": [
+                "y(0) = 7",
+                "y'(0) = -11"
+            ],
+            "steps": [
+                {
+                    "label": "2.1 หาผลการแปลงลาปลาซของสมการเชิงอนุพันธ์",
+                    "equations": [
+                        "\\mathcal{L}\\{y''\\} - \\mathcal{L}\\{y'\\} - 6\\mathcal{L}\\{y\\} = \\mathcal{L}\\{6\\}",
+                        "\\mathcal{L}\\{y''\\} - \\mathcal{L}\\{y'\\} - 6\\mathcal{L}\\{y\\} = \\frac{6}{s}"
+                    ]
+                },
+                {
+                    "label": "2.2 แทนค่าความสัมพันธ์ <span class='text-red'>\\(\\mathcal{L}\\{y'\\} = s\\mathcal{L}\\{y\\} - y(0)\\) และ \\(\\mathcal{L}\\{y''\\} = s^2\\mathcal{L}\\{y\\} - sy(0) - y'(0)\\)</span>",
+                    "equations": [
+                        "[s^2\\mathcal{L}\\{y\\} - sy(0) - y'(0)] - [s\\mathcal{L}\\{y\\} - y(0)] - 6\\mathcal{L}\\{y\\} = \\frac{6}{s}"
+                    ]
+                },
+                {
+                    "label": "2.3 แทนค่า y(0) และ y'(0) จากเงื่อนไขเริ่มต้น",
+                    "equations": [
+                        "[s^2\\mathcal{L}\\{y\\} - s(7) - (-11)] - [s\\mathcal{L}\\{y\\} - (7)] - 6\\mathcal{L}\\{y\\} = \\frac{6}{s}",
+                        "s^2\\mathcal{L}\\{y\\} - 7s + 11 - s\\mathcal{L}\\{y\\} + 7 - 6\\mathcal{L}\\{y\\} = \\frac{6}{s}",
+                        "(s^2 - s - 6)\\mathcal{L}\\{y\\} - 7s + 18 = \\frac{6}{s}",
+                        "(s^2 - s - 6)\\mathcal{L}\\{y\\} = \\frac{6}{s} + 7s - 18 = \\frac{6 + 7s^2 - 18s}{s}",
+                        "(s^2 - s - 6)\\mathcal{L}\\{y\\} = \\frac{7s^2 - 18s + 6}{s}"
+                    ]
+                },
+                {
+                    "label": "2.4 จัดรูปสมการให้อยู่ในรูป L{y}=F(s)",
+                    "equations": [
+                        "\\mathcal{L}\\{y\\} = \\frac{7s^2 - 18s + 6}{(s)(s^2 - s - 6)}"
+                    ]
+                },
+                {
+                    "label": "แยกเศษส่วนย่อย <span style='color: red; font-weight: bold;'>กด expand() ใช้เครื่องคิดเลข</span>",
+                    "equations": [
+                        "\\mathcal{L}\\{y\\} = -\\frac{1}{s} + \\frac{1}{(s - 3)} + \\frac{7}{(s + 2)}"
+                    ]
+                },
+                {
+                    "label": "2.5 หาผลเฉลย y จาก \\(\\mathcal{L}^{-1}\\{F(s)\\}\\)",
+                    "equations": [
+                        "y(t) = -\\mathcal{L}^{-1}\\left\\{\\frac{1}{s}\\right\\} + \\mathcal{L}^{-1}\\left\\{\\frac{1}{(s - 3)}\\right\\} + 7\\mathcal{L}^{-1}\\left\\{\\frac{1}{(s + 2)}\\right\\}"
+                    ]
+                },
+                {
+                    "label": "ตอบ",
+                    "equations": [
+                        "y(t) = -1 + e^{3t} + 7e^{-2t}"
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "question": "0010",
+        "no1": {
+            "title": "จงหาผลการแปลงลาปลาซผกผันของ F(s) ที่กำหนดโดยใช้เศษส่วนย่อย ตามขั้นตอนต่อไปนี้",
+            "original": "F(s) = \\frac{8s^2 - 84s + 96}{s^3 - 8s^2 + 12s}",
+            "steps": [
+                {
+                    "label": "1.1 เขียน F(s) เศษส่วนย่อย <span class='text-red'>กด expand() ใช้เครื่องคิดเลข</span>",
+                    "equations": [
+                        "F(s) = \\frac{8}{s} + \\frac{5}{(s - 2)} - \\frac{5}{(s - 6)}"
+                    ]
+                },
+                {
+                    "label": "1.2 หาผลการแปลงลาปลาซของเศษส่วนย่อยในข้อ 1.1",
+                    "equations": [
+                        "f(t) = \\mathcal{L}^{-1}\\left\\{\\frac{8}{s}\\right\\} + \\mathcal{L}^{-1}\\left\\{\\frac{5}{(s - 2)}\\right\\} - \\mathcal{L}^{-1}\\left\\{\\frac{5}{(s - 6)}\\right\\}",
+                        "f(t) = 8\\mathcal{L}^{-1}\\left\\{\\frac{1}{s}\\right\\} + 5\\mathcal{L}^{-1}\\left\\{\\frac{1}{(s - 2)}\\right\\} - 5\\mathcal{L}^{-1}\\left\\{\\frac{1}{(s - 6)}\\right\\}",
+                        "f(t) = 8 + 5e^{2t} - 5e^{6t}"
+                    ]
+                },
+                {
+                    "label": "ตอบ",
+                    "equations": [
+                        "f(t) = 8 + 5e^{2t} - 5e^{6t}"
+                    ]
+                }
+            ]
+        },
+        "no2": {
+            "title": "จงหาผลเฉลยของสมการอนุพันธ์ DE โดยใช้ผลการแปลงลาปลาซตามขั้นตอนต่อไปนี้",
+            "equation": "y'' + 4y = 4",
+            "initial_conditions": [
+                "y(0) = 8",
+                "y'(0) = -2"
+            ],
+            "steps": [
+                {
+                    "label": "2.1 หาผลการแปลงลาปลาซของสมการเชิงอนุพันธ์",
+                    "equations": [
+                        "\\mathcal{L}\\{y''\\} + 4\\mathcal{L}\\{y\\} = \\mathcal{L}\\{4\\}",
+                        "\\mathcal{L}\\{y''\\} + 4\\mathcal{L}\\{y\\} = \\frac{4}{s}"
+                    ]
+                },
+                {
+                    "label": "2.2 แทนค่าความสัมพันธ์ <span class='text-red'>\\(\\mathcal{L}\\{y'\\} = s\\mathcal{L}\\{y\\} - y(0)\\) และ \\(\\mathcal{L}\\{y''\\} = s^2\\mathcal{L}\\{y\\} - sy(0) - y'(0)\\)</span>",
+                    "equations": [
+                        "[s^2\\mathcal{L}\\{y\\} - sy(0) - y'(0)] + 4\\mathcal{L}\\{y\\} = \\frac{4}{s}"
+                    ]
+                },
+                {
+                    "label": "2.3 แทนค่า y(0) และ y'(0) จากเงื่อนไขเริ่มต้น",
+                    "equations": [
+                        "[s^2\\mathcal{L}\\{y\\} - s(8) - (-2)] + 4\\mathcal{L}\\{y\\} = \\frac{4}{s}",
+                        "s^2\\mathcal{L}\\{y\\} - 8s + 2 + 4\\mathcal{L}\\{y\\} = \\frac{4}{s}",
+                        "(s^2 + 4)\\mathcal{L}\\{y\\} - 8s + 2 = \\frac{4}{s}",
+                        "(s^2 + 4)\\mathcal{L}\\{y\\} = \\frac{4}{s} + 8s - 2 = \\frac{4 + 8s^2 - 2s}{s}",
+                        "(s^2 + 4)\\mathcal{L}\\{y\\} = \\frac{8s^2 - 2s + 4}{s}"
+                    ]
+                },
+                {
+                    "label": "2.4 จัดรูปสมการให้อยู่ในรูป L{y}=F(s)",
+                    "equations": [
+                        "\\mathcal{L}\\{y\\} = \\frac{8s^2 - 2s + 4}{(s)(s^2 + 4)}"
+                    ]
+                },
+                {
+                    "label": "แยกเศษส่วนย่อย <span style='color: red; font-weight: bold;'>กด expand() ใช้เครื่องคิดเลข</span>",
+                    "equations": [
+                        "\\mathcal{L}\\{y\\} = \\frac{1}{s} + \\frac{7s}{(s^2 + 4)} - \\frac{2}{(s^2 + 4)}"
+                    ]
+                },
+                {
+                    "label": "2.5 หาผลเฉลย y จาก \\(\\mathcal{L}^{-1}\\{F(s)\\}\\)",
+                    "equations": [
+                        "y(t) = \\mathcal{L}^{-1}\\left\\{\\frac{1}{s}\\right\\} + 7\\mathcal{L}^{-1}\\left\\{\\frac{s}{s^2 + 2^2}\\right\\} - \\mathcal{L}^{-1}\\left\\{\\frac{2}{s^2 + 2^2}\\right\\}"
+                    ]
+                },
+                {
+                    "label": "ตอบ",
+                    "equations": [
+                        "y(t) = 1 + 7\\cos(2t) - \\sin(2t)"
+                    ]
+                }
+            ]
+        }
     }
-  }
 ]
