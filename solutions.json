@@ -1,0 +1,80 @@
+[
+  {
+    "question": "0001",
+    "no1": {
+      "title": "Inverse Laplace Transform",
+      "original": "F(s) = \\frac{5s^2 + 14s - 92}{(s - 8)(s^2 + 4)}",
+      "steps": [
+        {
+          "label": "1.1 Partial Fraction",
+          "equations": [
+            "F(s) = \\frac{5}{s - 8} + \\frac{14}{s^2 + 4}"
+          ]
+        },
+        {
+          "label": "1.2 Inverse Laplace",
+          "equations": [
+            "f(t) = \\mathcal{L}^{-1}\\left\\{\\frac{5}{s - 8}\\right\\} + \\mathcal{L}^{-1}\\left\\{\\frac{14}{s^2 + 4}\\right\\}",
+            "f(t) = 5e^{8t} + 7\\sin(2t)"
+          ]
+        },
+        {
+          "label": "Final f(t)",
+          "equations": [
+            "f(t) = 5e^{8t} + 7\\sin(2t)"
+          ]
+        }
+      ]
+    },
+    "no2": {
+      "title": "Differential Equation",
+      "equation": "y'' + 4y' + 3y = -16e^t",
+      "initial_conditions": ["y(0) = 1", "y'(0) = -13"],
+      "steps": [
+        {
+          "label": "2.1 Laplace result",
+          "equations": [
+            "\\mathcal{L}\\{y'' + 4y' + 3y\\} = \\mathcal{L}\\{-16e^t\\}"
+          ]
+        },
+        {
+          "label": "2.2 Replace derivative relations",
+          "equations": [
+            "(s^2Y(s) - sy(0) - y'(0)) + 4(sY(s) - y(0)) + 3Y(s) = -\\frac{16}{s - 1}"
+          ]
+        },
+        {
+          "label": "2.3 Substitute initial conditions",
+          "equations": [
+            "(s^2Y(s) - s(1) - (-13)) + 4(sY(s) - 1) + 3Y(s) = -\\frac{16}{s - 1}",
+            "(s^2 + 4s + 3)Y(s) - s + 9 = -\\frac{16}{s - 1}"
+          ]
+        },
+        {
+          "label": "2.4 Arrange L{y}=F(s)",
+          "equations": [
+            "Y(s) = \\frac{s - 9}{s^2 + 4s + 3} - \\frac{16}{(s - 1)(s^2 + 4s + 3)}"
+          ]
+        },
+        {
+          "label": "Partial Fraction",
+          "equations": [
+            "Y(s) = \\frac{4}{s + 3} - \\frac{2}{s - 1} - \\frac{1}{s + 1}"
+          ]
+        },
+        {
+          "label": "2.5 Inverse Laplace",
+          "equations": [
+            "y(t) = 4\\mathcal{L}^{-1}\\left\\{\\frac{1}{s + 3}\\right\\} - 2\\mathcal{L}^{-1}\\left\\{\\frac{1}{s - 1}\\right\\} - \\mathcal{L}^{-1}\\left\\{\\frac{1}{s + 1}\\right\\}"
+          ]
+        },
+        {
+          "label": "Final Answer",
+          "equations": [
+            "y(t) = 4e^{-3t} - 2e^t - e^{-t}"
+          ]
+        }
+      ]
+    }
+  }
+]
